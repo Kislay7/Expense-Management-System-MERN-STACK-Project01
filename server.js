@@ -24,11 +24,11 @@ app.use("/api/v1/users", require("./routes/userRoute"));
 
 // Serve static files from 'Client/public' directory in production
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "Client", "public")));
+  app.use(express.static(path.join(__dirname, "client", "public")));
 
   // Serve the index.html file for any non-API routes
   app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "Client", "public", "index.html"));
+    res.sendFile(path.join(__dirname, "client", "public", "index.html"));
   });
 }
 
