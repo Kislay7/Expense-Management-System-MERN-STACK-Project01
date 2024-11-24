@@ -2,9 +2,8 @@ const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
 const dotenv = require("dotenv");
-const colors = require("colors");
-const connectDb = require("./config/connectDb");
 const path = require("path");
+const connectDb = require("./config/connectDb");
 
 // config dot env file
 dotenv.config();
@@ -23,13 +22,13 @@ app.use(cors());
 // API routes
 app.use("/api/v1/users", require("./routes/userRoute"));
 
-// Serve static files from the React app (if any)
+// Serve static files from 'Client/public' directory in production
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "Client", "build")));
+  app.use(express.static(path.join(__dirname, "Client", "public")));
 
-  // Serve the index.html for any routes that are not API routes
+  // Serve the index.html file for any non-API routes
   app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "Client", "build", "index.html"));
+    res.sendFile(path.join(__dirname, "Client", "public", "index.html"));
   });
 }
 
